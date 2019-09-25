@@ -1,0 +1,8 @@
+public int max()
+{
+    arr
+}
+
+public static boolean loneTeen(inta) {
+        a=max(2,3)
+}
