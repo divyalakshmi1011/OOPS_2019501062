@@ -23,12 +23,12 @@ class ContactsManager {
      * Define a variable myFriends which is an array that can hold 
      * the contacts of your friends.
      */
-
+    Contact[] myFriends;
     /**
      * Define a variable friendsCount of type int maintain the number of 
      * contacts of your friends.
      */
-
+    int friendsCount;
 
     /**
      * When the object of ContactManager is created, the constructor should 
@@ -37,7 +37,14 @@ class ContactsManager {
      * 1. Initializes the friendsCount to 0 as there no contacts in the list.
      * 2. myFriends with array initial size of 500
      */
- 
+    public ContactsManager() {
+        int friendsCount = 0;
+        Contact myFriends[] = new Contact[500];
+
+
+        this.myFriends = myFriends;
+        this.friendsCount = friendsCount;
+    }
     /**
      * The addContact method takes in a parameter of type contact object and 
      * adds this to the contact list.
@@ -45,7 +52,8 @@ class ContactsManager {
      */
     public void addContact(Contact contact) {
         //  Your code goes here....
-
+        myFriends[friendsCount] = contact;
+        friendsCount++;
         //  Nothing to be returned... As this method is void...
     }
  
@@ -57,22 +65,28 @@ class ContactsManager {
      */
     public Contact searchContact(String searchName) {
         //  Your code goes here....
-
+        for(int i = 0; i < friendsCount; i++){
+            if(searchName.equals(myFriends[i].getName())){       
+                return myFriends[i];
+            }
+        }
         return null;
     }
-
     /**
      * This method search for the contact based on the email of your friend 
      * and gives the first occurance of the contact in your friends list.
      * @param searchName, the email of the contact to be searched in the friends list.
      * @return the contact of the friend, null otherwise.
      */
-    public Contact searchContactByEmail(String email) {
+    public Contact searchContactByEmail(String Email) {
         //  Your code goes here....
-
+        for(int i = 0; i < friendsCount; i++){
+            if(Email.equals(myFriends[i].getEmail())){       
+                return myFriends[i];
+            }
+        }
         return null;
     }
-
     /**
      * This method deletes the contact based on the name of your friend and returns
      * true on success and false if failure in deleting the contact.
@@ -82,7 +96,15 @@ class ContactsManager {
      */
     public boolean deleteContact(String searchName) {
         //  Your code goes here....
-
+        for(int i = 0; i < friendsCount; i++) {
+            if(searchName.equals(myFriends[i].getName())){
+                for(int j = i+1; j < friendsCount; j++){
+                    myFriends[i] = myFriends[j];
+                }
+                friendsCount--;
+                return true;
+            }
+        }
         return false;
     }
 

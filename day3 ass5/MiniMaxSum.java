@@ -24,8 +24,8 @@ public class MiniMaxSum {
         //  Your code goes here...
         int min = arr[0];
         //int i;
-      for(int i=0; i<arr.length; i++ ) {
-         if(arr[i]<min) {
+      for (int i=0; i<arr.length; i++ ) {
+         if (arr[i]<min) {
             min = arr[i];
          }
       }

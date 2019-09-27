@@ -13,15 +13,15 @@ public class Contact
 { 
     // Instance Variables 
     String name; 
-    String email; 
-    Long phoneNumber;  
+    String Email; 
+    String phoneNumber;  
   
     // Constructor Declaration of Class 
-    public Contact(String name, String email, 
-                   Long phoneNumber) 
+    public Contact(String name, String Email, 
+                   String phoneNumber) 
     { 
         this.name = name; 
-        this.email = email; 
+        this.Email = Email; 
         this.phoneNumber = phoneNumber;  
     } 
   
@@ -32,29 +32,45 @@ public class Contact
     } 
   
     // method 2 
-    public String getemail() 
+    public String getEmail() 
     { 
-        return email; 
+        return Email; 
     } 
   
     // method 3 
-    public Long getphoneNumber() 
+    public String getPhoneNumber() 
     { 
         return phoneNumber; 
     } 
+
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
+
+    public void setEmail(String Email) 
+    {
+        this.Email = Email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) 
+    {
+        this.phoneNumber = phoneNumber;
+    }
   
     public String toString() 
     { 
-        return("Name"+ this.getName()+ 
-               ".\nemail" + this.getemail()+".\nPhone Number"+ this.getphoneNumber()); 
-    } 
+        return "{ Name = "+this.getName()+", Email = "+this.getEmail()+", Phone Number = "+this.getPhoneNumber()+" }";
+ 
+    }
+
   
     public static void main(String[] args) 
     { 
-        Contact c1 = new Contact("Divya","divya@3", 34566781098L);
-        Contact c2 = new Contact("Himaja","himaja@1", 1234567L);
+        Contact c1 = new Contact("Divya","divya@3", "34566781098");
+        Contact c2 = new Contact("Himaja","himaja@1", "1234567");
         System.out.println(c1.toString());
-        System.out.println("=============================");
+        //System.out.println("=============================");
         System.out.println(c2.toString());
     } 
 } 
