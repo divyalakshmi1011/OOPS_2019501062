@@ -1,20 +1,9 @@
-/**
- * List Data Type. Write a data type List.java that
- * represents an array of homogeneous elements. 
- * Implement the following public API which can be 
- * used as an API for the rest of your course.
- * 
- * @author Praveen Garimella
- * @author Siva Sankar
- * 
- * @since August - 2018
- */
-
 import java.io.BufferedInputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class List {
-    //Implement all the methods mentioned to build a ListADT
+	//Implement all the methods mentioned to build a ListADT
 
     /*
      * The goal for the list is to store items.
@@ -41,8 +30,7 @@ public class List {
     // declare a private int[]
     // don't create the array yet using new
     // that's the job of the List constructor
-
-    //  Your code goes here.....
+    private int[] myList;
 
     /*
      * What are the other class variables needed for creating a list?
@@ -67,12 +55,15 @@ public class List {
     // declare a private int size
     // again, don't initialize it here
     // variable initialization should be done in the constructor
-    private int[] myList;
     private int size;
+
     /*
      * The purpose of the constructor is to initialize the
      * class variables with some default values.
      */
+    
+    
+
     public List() {
 
         // what are the two variables to be initialized here?
@@ -80,26 +71,36 @@ public class List {
         // What should be the default values?
         // In the case of the list, it should be empty but
         // it should be initialized with an array size like 10
+        
 
         // Think about the initial value for size.
         // How many items do we have in the list when you create it?
         // An empty list has how many items?
         // That is the initial value to use for size.
-
-        //  Your code goes here.....
         final int capacity = 10;
         this.myList = new int[capacity];
         this.size = 0;
     }
-    
-    public void resize() {
-        int[] temp = new int[myList.length * 2];
-        for (int i = 0; i < size; i++) {
-            temp[i] = myList[i];
-        }
-        myList = temp;
-        temp = null;
+
+    /*
+     * Overloaded constructor with list capacity as argument
+     * The default constructor sets the list capacity to 10
+     * So, adding an item when the list size is 10
+     * raises a Index Out of Bounds Exception
+     * There will be some clients of the ADT that will require
+     * the list to contain n elements which is known
+     * at the time of creating the list.
+     * 
+     * The overloaded constructor is a way to initialize a list with
+     * a list capacity of n items where n is given as an argument to
+     * constructor.
+     * 
+     */
+    public List(int capacity) {
+        size = 0;
+        myList = new int[capacity];
     }
+    
     /*
      * The add method does what the name suggests.
      * Add an int item to the list.
@@ -113,7 +114,6 @@ public class List {
      */
     public void add(int item) {
         //Inserts the specified element at the end of the list.
-        //  Your code goes here.....
         if (size == myList.length) {
             resize();
             this.myList[size] = item;
@@ -125,6 +125,47 @@ public class List {
     }
 
     /*
+     *
+     * Resize the list
+     * Sometimes the clients of the ADT won't know the expected list capacity
+     * To solve this the list has to grow dynamically
+     * when the maximum capacity is reached and there is no room to add items.
+     * So, how do we dynamically resize the list?
+     * Java doesn't support resize of array. Here are some options.
+     *
+     * Option 1
+     * Create a new array of the desired size,
+     * and copy the contents from the original array to the new array,
+     * using java.lang.System.arraycopy(...);
+     * 
+     * Option 2
+     * Use java.util.Arrays.copyOf(...) methods which returns a bigger array,
+     * with the contents of the original array.
+     *
+     * TODO
+     * Create a method called resize(). Resize should create an new array that is
+     * double the size of the old array.
+     * Then copy the contents of the old array to the new one.
+     * 
+     * When should the resize method be invoked and from where?
+     * Will the client invoke resize or is it internal to List class?
+     * Should the resize be public method or private?
+     * Should the resize method return any values?
+     * You know enough of Object Oriented Programming to answer these questions :-)
+     *
+     */
+
+    // todo create resize method
+    public void resize() {
+        int[] temp = new int[myList.length * 2];
+        for (int i = 0; i < size; i++) {
+            temp[i] = myList[i];
+        }
+        myList = temp;
+        temp = null;
+    }
+
+    /*
      * The size method returns the value of the size.
      * The purpose of the method is to announce the size of the list
      * to the objects outside the list
@@ -132,8 +173,6 @@ public class List {
      * The method returns an int. Empty list should return 0.
      */
     public int size() {
-        // replace the code below to implement the size method
-        //  Your code goes here.....
         return this.size;
     }
 
@@ -157,10 +196,10 @@ public class List {
      * array = [1,3,0,0,0,0,0,0,0,0]
      * The method returns void (nothing)
      */
+
     public void remove(int index) {
         // write the logic for remove here.
         // Think about what to do to the size variable.
-        // Your code goes here.....
         int[] temp = myList;
         if (index >= 0 && index < size) {
             for (int j = index + 1; j < size; j++) {
@@ -186,8 +225,6 @@ public class List {
      * number of items in the list? Would size variable be useful?
      */
     public int get(int index) {
-        // Replace the code below to write the code for get
-        // Your code goes here.....
         if (index >= 0 && index < size) {
             return myList[index];
         } else{
@@ -216,13 +253,16 @@ public class List {
      *
      */
     public String toString() {
-        // Your code goes here.....
-        String str1 = "";
-        for (int index = 0; index < size; index++) {
-            str1 = str1 + myList[index] +",";
+        if(size == 0)
+            return "";
+        String str = "[";
+        int i = 0;
+        for(i = 0; i < size - 1; i++) {
+            str = str + myList[i] + ",";
         }
-        return "["+str1.substring(0,str1.length()-1)+"]";
-    } 
+        str = str + myList[i] + "]";
+        return str;
+    }
     
     /*
      * Contains return true if the list has
@@ -231,7 +271,6 @@ public class List {
      * the item exists and otherwise false
      */
     public boolean contains(int item) {
-        // Your code goes here.....
         for (int index = 0; index < size; index++) {
             if (myList[index] == item) {
                 return true;
@@ -246,19 +285,14 @@ public class List {
      * or -1 if this list does not contain the element.
      */
     public int indexOf(int item) {
-        // Your code goes here.....
         for (int index = 0; index < size; index++) {
             if (myList[index] == item) {
                 return index;
             }
         }
-        return -1;
+        return -1; 
     }
 
-    /**
-     * You can use the main method for your own
-     * test purposes
-     */
 	public static void main(String[] args) {
         // create an object of the list to invoke methods on it
         List l = new List();
