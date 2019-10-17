@@ -27,7 +27,7 @@ public class Menu {
     //  Creating an object for Show with the movieName, datetime and
     //  the number of seats and adding the show to the BookYourShow
     //  Object.
-    Show show = new Show(movieName, datetime, seats);
+    show show = new show(movieName, datetime, seats);
     book.addAShow(show);
     //System.out.println(show);
 
@@ -36,7 +36,7 @@ public class Menu {
     //  Object.
     movieName = "Mission Impossible";
     datetime = "Aug 18, 2015 10:30";
-    show = new Show(movieName, datetime, seats);
+    show = new show(movieName, datetime, seats);
     book.addAShow(show);
 
     //  Creating an object for Show with the movieName, datetime and
@@ -44,11 +44,11 @@ public class Menu {
     //  Object.
     movieName = "Inside Out";
     datetime = "Aug 18, 2015 15:30";
-    show = new Show(movieName, datetime, seats);
+    show = new show(movieName, datetime, seats);
     book.addAShow(show);
 
     //  Searching for a show at a specific date and time.
-    Show result = book.getAShow("Mission Impossible", "Aug 18, 2015 17:30");
+    show result = book.getAShow("Mission Impossible", "Aug 18, 2015 17:30");
     if(result == null)
       System.out.println("No shows available!");
     else
@@ -56,11 +56,11 @@ public class Menu {
 
     //  Now the Patron's are trying to book the tickets for which the
     //  show is available based on the previous step.
-    Patron p = new Patron("Praveen", "9989968765");
+    patron p = new patron("Praveen", "9989968765");
     String[] s = {"B1", "B2"};
     result.bookAShow(p, s);
 
-    Patron r = new Patron("Varshini", "888888888");
+    patron r = new patron("Varshini", "888888888");
     result.bookAShow(r, s);
 
     //  Print the tickets Once the tickets are booked....
