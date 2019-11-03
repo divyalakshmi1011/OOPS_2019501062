@@ -1,7 +1,21 @@
+import java.util.Random;
+
+
 class Solution {
 	public static int[] quickSort(int[] arr) {
 		// fill you code Here
+        shuffle(arr);
 		sort(arr,0,arr.length-1);
+		return arr;
+	}
+	private static int[] shuffle(int[] arr) {
+		Random rnd = new Random();
+		for(int i = arr.length-1; i > 0; i--) {
+			int index = rnd.nextInt(i+1);
+			int a = arr[index];
+			arr[index] = arr[i];
+			arr[i] = a;
+		}
 		return arr;
 	}
 	private static int partition(final int[] arr, final int low, final int high) {
